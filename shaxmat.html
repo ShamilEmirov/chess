@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .table {}
+
+        .kub {
+            width: 95px;
+            height: 95px;
+            display: inline-block;
+            /* display: flex;
+        justify-content: center;
+        align-items: center; */
+            text-align: center;
+
+        }
+
+        i {
+            margin-top: 35px;
+            font-size: 35px;
+        }
+
+        .kub:nth-child(odd) {
+            background-color: whitesmoke;
+        }
+
+        .kub:nth-child(even) {
+            background-color: bisque;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="table"></div>
+
+
+
+    <script>
+
+        let chess = [
+            ["fa-chess-rook", "fa-chess-knight", "fa-chess-bishop", "fa-chess-king", "fa-chess-knight", "fa-chess-bishop", "fa-chess-knight", "fa-chess-rook"],
+            ["fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn"],
+            ["i", "i", "i", "i", "i", "i", "i", "i"],
+            ["i", "i", "i", "i", "i", "i", "i", "i"],
+            ["i", "i", "i", "i", "i", "i", "i", "i"],
+            ["i", "i", "i", "i", "i", "i", "i", "i"],
+            ["fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn", "fa-chess-pawn"],
+            ["fa-chess-rook", "fa-chess-knight", "fa-chess-bishop", "fa-chess-king", "fa-chess-knight", "fa-chess-bishop", "fa-chess-knight", "fa-chess-rook"],
+        ]
+
+        console.log(chess);
+
+        let table = document.querySelector(".table");
+        for (let y = 0; y < 8; y++) {
+            for (let x = 0; x < 8; x++) {
+                let kub = document.createElement('div');
+                kub.classList.add('kub')
+                let i = document.createElement('i')
+                y > 5 ? i.style.color = "brown" : " "
+                i.classList.add('fa-solid')
+                let c = chess[y][x]
+                i.classList.add(c)
+                kub.appendChild(i)
+                table.appendChild(kub)
+            }
+            let br = document.createElement("br")
+            table.appendChild(br)
+        }
+
+
+    </script>
+</body>
+
+</html>

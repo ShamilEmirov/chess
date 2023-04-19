@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+        div[id^=row] {
+            display: flex;
+            margin: 1px;
+            gap: 1px;
+        }
+
+        button {
+            width: 100px;
+            height: 100px;
+            background-color: burlywood;
+            border-radius: 10px;
+            border: 0px;
+        }
+
+        button.empty {
+            background-color: whitesmoke;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="row1">
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+        <div id="row2">
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+        <div id="row3">
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+        let rows = [
+            document.getElementById("row1").children,
+            document.getElementById("row2").children,
+            document.getElementById("row3").children
+        ]
+        let container = document.getElementById("container")
+
+        let board = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 0]
+        ]
+
+        function drawAll() {
+            for (let y = 0; y < 3; y++) 
+                for (let x = 0; x < 3; x++) {
+                    rows[y][x].innerHTML = board[y][x] ? board[y][x] : "";
+                    rows[y][x].dataset.x = x;
+                    rows[y][x].dataset.y = y;
+                    if (board[y][x]) {
+                        rows[y][x].classList.remove('empty')
+                    }
+                    else {
+                        rows[y][x].classList.add('empty')
+                    }
+                }
+            }
+        
+        drawAll()
+
+        function getEmptyCellCoordinates() {
+            let x = -1;
+            let y = -1;
+            for (let i = 0; i < 3; i++) {
+                y = i;
+                x = board[i].indexOf(0);
+                if (x != -1) break
+            }
+            return {y, x}
+        }
+
+        container.addEventListener('click',(e)=>{
+            if(e.target.tagName === 'BUTTON'){
+                let from = {
+                    y: e.target.dataset.y,
+                    x: e.target.dataset.x
+                };
+                let to = getEmptyCellCoordinates();
+                move(from, to);
+            }
+        }, false)
+
+        function validate (from, to){       //podtverj
+            
+            if( 
+                (board[from.y]==board[to.y-1] &&board[from.x]==board[to.x])
+            || (board[from.y]==board[to.y+1]&&board[from.x]==board[to.x])
+             || (board[from.y]==board[to.y]&&board[from.x]==board[to.x-1])
+              || (board[from.y]==board[to.y]&&board[from.x]==board[to.x+1])
+            )
+            return true
+        }
+
+
+        function move(from, to){
+            if(validate(from, to)){
+                let temp = board[from.y][from.x]
+                board[from.y][from.x] = board[to.y][to.x]
+                board[to.y][to.x] = temp
+                drawAll()
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
