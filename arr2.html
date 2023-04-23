@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cols{
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+        }
+        
+    </style>
+</head>
+<body>
+
+
+    
+
+    <script>
+
+        let container = document.createElement('div');
+        let a = 1;
+        for (let i = 0; i < 8; i++) {
+            let rows = document.createElement('div')
+            
+        for (let j = 0; j < 8; j++) {
+            let cols = document.createElement('div')
+            cols.classList.add('cols')
+            cols.textContent = a;
+            rows.appendChild(cols)
+            a++
+        }
+        document.body.appendChild(rows)
+    }
+    </script>
+</body>
+</html>
